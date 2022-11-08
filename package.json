@@ -1,7 +1,8 @@
 {
   "name": "oko_vpn",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "gulpfile.js",
+  "homepage": "",
   "repository": "https://github.com/AndreyZhigalov/oko_vpn.git",
   "author": "Andrey Zhigalov",
   "license": "ISC",
@@ -10,6 +11,7 @@
     "gulp-autoprefixer": "^8.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-gh-pages": "^0.5.4",
+    "gulp-minify": "^3.1.0",
     "sass": "^1.56.0"
   },
   "devDependencies": {

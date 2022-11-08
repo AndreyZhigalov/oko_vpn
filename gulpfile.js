@@ -5,10 +5,10 @@ const include = require("gulp-file-include")
 const csso = require("gulp-csso")
 const del = require("del")
 const concat = require("gulp-concat")
+const jsmin = require("gulp-minify")
 const autoprefixer = require("gulp-autoprefixer")
 const sync = require("browser-sync").create()
 const ghPages = require("gulp-gh-pages")
-const GulpClient = require("gulp")
 
 function html() {
     return src("src/**.html")
@@ -24,8 +24,14 @@ function scss() {
         .pipe(sass())
         .pipe(autoprefixer())
         .pipe(csso())
-        .pipe(concat("index.css"))
+        .pipe(concat("css/style.css"))
         .pipe(dest("dist"))
+}
+
+function js() {
+    return src("src/js/**.js")
+        .pipe(include({ prefix: "@@" }))        
+        .pipe(dest("dist/js"))
 }
 
 function images() {
@@ -40,17 +46,19 @@ function serve() {
     sync.init({
         server: "./dist"
     })
-    
-    watch('src/**.html', series(html)).on("change", sync.reload);
-    watch('src/parts/**.html', series(html)).on("change", sync.reload);
-    watch('src/scss/**.scss', series(scss)).on("change", sync.reload)
+
+    watch('src/**.html', () => html()).on("change", sync.reload);
+    watch('src/parts/**.html', () => html()).on("change", sync.reload);
+    watch('src/scss/**.scss', () => scss()).on("change", sync.reload);
+    watch("src/js/**.js", () => js()).on("change", sync.reload)
 }
 
 function deploy() {
     return src("./dist/**/*").pipe(ghPages("https://github.com/AndreyZhigalov/oko_vpn.git"))
 }
 
-exports.build = series(clear, scss, html, images)
-exports.serve = series(clear, scss, html, images, serve)
+
+exports.build = series(clear, scss, html, js, images)
+exports.serve = series(clear, scss, html, js, images, serve)
 exports.clear = clear
 exports.deploy = deploy

@@ -77,6 +77,13 @@ $shadow: 0px 12px 30px #0000000f;
   }
 }
 
+@mixin dropdownHeader {
+  gap: 25px;
+  padding-top: 26px;
+  transform-origin: top;
+  transition: transform 0.4s;
+}
+
 @keyframes alienAppears {
   from {
     transform: rotate(-6deg);
@@ -176,6 +183,9 @@ header {
     max-width: 1920px;
     height: 100px;
     background-color: $mainBackground;
+    a {
+      text-align: left;
+    }
     .navbar__menu {
       display: grid;
       grid-template-columns: repeat(6, max-content);
@@ -183,7 +193,6 @@ header {
       grid-gap: 50px;
       transition: 0.5s;
       a {
-       
         &:last-child {
           color: $mainElementColor;
           border-bottom: transparent 2px solid;
@@ -196,6 +205,7 @@ header {
     }
     .navbar__menu-button {
       @include blueTextWhiteBG();
+      position: fixed;
       z-index: 9995;
       width: 50px;
       height: 50px;
@@ -218,7 +228,7 @@ header {
         position: fixed;
         z-index: 9995;
         top: 0;
-        left: 0;
+        left: 100%;
         background-color: $mainBackground;
         width: 100%;
         height: 100%;
@@ -227,10 +237,13 @@ header {
         justify-items: center;
         align-content: center;
         grid-gap: 30px;
-        animation: showNavbar 0.5s ease-in-out 1;
         .navbar__menu-button {
           display: block;
         }
+      }
+      .active {
+        left: 0%;
+        animation: showNavbar 0.5s ease-in-out 1;
       }
     }
   }
@@ -247,6 +260,18 @@ header {
   grid-template-rows: 1fr;
   align-items: center;
   justify-items: center;
+  @media (max-width: 1100px) {
+    
+    .home__text {
+      grid-column: 1 /-1;
+      padding: 0 20px;
+      margin: 0;
+    }
+  }
+  @media (max-width: 650px) {
+    
+    height: 600px;
+  }
   &__text {
     @include flexBetween();
     @include sideTextBlock();
@@ -261,15 +286,6 @@ header {
       margin-top: 0;
     }
   }
-
-  @media (max-width: 1100px) {
-    .home__text {
-      grid-column: 1 /-1;
-      padding: 0 20px;
-      margin: 0;
-    }
-  }
-
   &__background {
     position: absolute;
     z-index: 0;
@@ -304,6 +320,7 @@ header {
 .main-button {
   @include bigButton();
   @include whiteTextBlueBG();
+  text-align: center;
   &:hover {
     @include blueTextWhiteBG();
   }
@@ -526,6 +543,19 @@ header {
 
 */
 
+@keyframes dropdown {
+  from {
+    height: 0;
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  to {
+    opacity: 1;
+    height: max-content;
+    transform: scaleY(1);
+  }
+}
+
 .countries {
   @include sectionAlign();
   min-height: 800px;
@@ -546,15 +576,53 @@ header {
     flex-wrap: wrap;
     gap: 65px 55px;
     margin-bottom: 100px;
+    @media (max-width: 640px) {
+      gap: 10px 55px;
+    }
     .countries__container {
       header {
-        margin-bottom: 26px;
+        position: relative;
+        @media (max-width: 640px) {
+          width: 100vw;
+          text-align: left;
+          box-shadow: $shadow;
+          display: flex;
+          align-items: center;
+          padding: 10px 30px;
+          &::after {
+            content: url('../img/icons/arrowhead.svg');
+            position: absolute;
+            top: 6px;
+            right: 30px;
+            font-size: 20px;
+            font-weight: 800;
+          }
+        }
       }
 
       .countries__block {
+        @include flexBetween();
+        @include dropdownHeader();
+        transform: scaleY(1);
+        justify-content: flex-start;
+      }
+      @media (max-width: 640px) {
+        .countries__block {
         display: flex;
-        flex-wrap: wrap;
-        gap: 25px;
+        height: 0;
+        opacity: 0;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform height opacity 0.4s;
+        }
+        .active {
+          @include flexBetween();
+          @include dropdownHeader();
+          height: max-content;
+          opacity: 1;
+          transform: scaleY(1);
+          animation: dropdown 0.3s ease-out 1;
+        }
       }
     }
   }
@@ -584,7 +652,7 @@ header {
 */
 
 .pre-footer {
-  background-image: url('img/earthFooterBG.jpg');
+  background-image: url('../img/earthFooterBG.jpg');
   background-size: contain;
   display: flex;
   flex-direction: column;
@@ -594,7 +662,7 @@ header {
   min-height: 520px;
   margin: auto;
   padding: 100px 0;
-  .pre-dooter__text-block {
+  &__text-block {
     @include sideTextBlock();
     max-width: 1150px;
     text-align: center;
@@ -606,8 +674,15 @@ header {
       font-size: 48px;
       margin: 38px 0 62px 0;
     }
+    div {
+      @media (max-width: 640px) {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+    }
   }
-
 }
 
 /*
@@ -644,7 +719,6 @@ footer {
         display: flex;
         flex-direction: row;
         gap: 20px;
-    
       }
     }
     @media (max-width: 1280px) {
