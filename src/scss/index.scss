@@ -77,13 +77,6 @@ $shadow: 0px 12px 30px #0000000f;
   }
 }
 
-@mixin dropdownHeader {
-  gap: 25px;
-  padding-top: 26px;
-  transform-origin: top;
-  transition: transform 0.4s;
-}
-
 @keyframes alienAppears {
   from {
     transform: rotate(-6deg);
@@ -115,17 +108,35 @@ $shadow: 0px 12px 30px #0000000f;
   box-sizing: border-box;
 }
 
+*::-webkit-scrollbar {
+  width: 0px;
+  height: 5px; /* width of the entire scrollbar */
+}
+
+*::-webkit-scrollbar-track {
+  background: $mainBackground; /* color of the tracking area */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: $mainElementColor; /* color of the scroll thumb */
+  border-radius: 10px; /* roundness of the scroll thumb */
+  border: none; /* creates padding around scroll thumb */
+}
+
+* {
+  margin: 0;
+}
+
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
   scrollbar-width: none;
 }
+
 html::-webkit-scrollbar {
   display: none;
 }
-body {
-  margin: 0;
-}
+
 /*
         ШРИФТ
 */
@@ -261,7 +272,6 @@ header {
   align-items: center;
   justify-items: center;
   @media (max-width: 1100px) {
-    
     .home__text {
       grid-column: 1 /-1;
       padding: 0 20px;
@@ -269,7 +279,6 @@ header {
     }
   }
   @media (max-width: 650px) {
-    
     height: 600px;
   }
   &__text {
@@ -467,26 +476,44 @@ header {
     @include flexBetween();
     &-item {
       width: 300px;
-      height: 375px;
+      min-height: 375px;
       box-shadow: $shadow;
+      background-color: $mainBackground;
       padding: 35px;
       margin: 0%;
+      border-radius: 10px;
+      transform: scale(100%);
+      transition: transform 0.5s;
+      &:first-of-type {
+        border: 2px solid $mainElementColor;
+      }
+      &:hover {
+        transform: scale(110%);
+        z-index: 5;
+      }
+      img {
+        margin-bottom: 25px;
+      }
       ul {
-        list-style: none;
+        list-style: none;        
         .checked {
           &::before {
-            content: url('img/icons/circleAllow.svg');
+            content: url('../img/icons/circleAllow.svg');
           }
         }
         li {
           position: relative;
-          margin: 0 0 27.5px 0;
+          
+             margin: 0 0 27.5px 0;
+          &:last-child { 
+            margin: 0;
+          }
           p {
             font-size: 14px;
             margin: 0;
           }
           &::before {
-            content: url('img/icons/circleClose.svg');
+            content: url('../img/icons/circleClose.svg');
             position: absolute;
             left: -40px;
           }
@@ -496,6 +523,15 @@ header {
   }
   @media (max-width: 1080px) {
     margin-bottom: 100px;
+    &__blocks {
+      justify-content: flex-start;
+      gap: 24px;
+      padding: 0 50px;
+      flex-wrap: nowrap;
+      height: 500px;
+      overflow-y: hidden;
+      overflow-x: scroll;
+    }
   }
 }
 
@@ -543,19 +579,6 @@ header {
 
 */
 
-@keyframes dropdown {
-  from {
-    height: 0;
-    opacity: 0;
-    transform: scaleY(0);
-  }
-  to {
-    opacity: 1;
-    height: max-content;
-    transform: scaleY(1);
-  }
-}
-
 .countries {
   @include sectionAlign();
   min-height: 800px;
@@ -585,7 +608,6 @@ header {
         @media (max-width: 640px) {
           width: 100vw;
           text-align: left;
-          box-shadow: $shadow;
           display: flex;
           align-items: center;
           padding: 10px 30px;
@@ -596,32 +618,39 @@ header {
             right: 30px;
             font-size: 20px;
             font-weight: 800;
+            transform: rotate(0deg);
+            transition: transform 0.3s;
           }
+        }
+      }
+      .arrowUp {
+        &::after {
+          transform: rotate(180deg);
         }
       }
 
       .countries__block {
         @include flexBetween();
-        @include dropdownHeader();
+        gap: 25px;
+        padding: 26px 0 0 0;
+        transform-origin: top;
         transform: scaleY(1);
         justify-content: flex-start;
       }
       @media (max-width: 640px) {
         .countries__block {
-        display: flex;
-        height: 0;
-        opacity: 0;
-        transform: scaleY(0);
-        transform-origin: top;
-        transition: transform height opacity 0.4s;
+          display: flex;
+          padding: 0;
+          height: 0;
+          opacity: 0;
+          transform: scaleY(0);
+          transition: transform, height, opacity, padding, 0.4s;
         }
         .active {
-          @include flexBetween();
-          @include dropdownHeader();
+          padding: 20px 0;
           height: max-content;
           opacity: 1;
           transform: scaleY(1);
-          animation: dropdown 0.3s ease-out 1;
         }
       }
     }
