@@ -103,7 +103,7 @@ $shadow: 0px 12px 30px #0000000f;
         ОСНОВА СТРАНИЦЫ
 */
 * {
-  font-family: 'Montserrat', sans-serif;
+ font-family: 'Montserrat', sans-serif;
   font-style: normal;
   box-sizing: border-box;
 }
@@ -475,6 +475,7 @@ header {
     width: 100%;
     @include flexBetween();
     &-item {
+      min-width: 250px;
       width: 300px;
       min-height: 375px;
       box-shadow: $shadow;
@@ -526,7 +527,7 @@ header {
     &__blocks {
       justify-content: flex-start;
       gap: 24px;
-      padding: 0 50px;
+      padding: 0 20px;
       flex-wrap: nowrap;
       height: 500px;
       overflow-y: hidden;
@@ -554,21 +555,29 @@ header {
     flex-wrap: wrap;
     gap: 28px;
     @media (max-width: 1080px) {
-      justify-content: center;
+      display: none;
+
     }
     img {
       height: 22px;
       width: max-content;
     }
   }
-  &__cover {
+  &__cover, &__inner-cover {
     width: 100%;
     max-width: 622px;
   }
+  &__inner-cover {
+    display: none;
+    margin-bottom: 30px;
+  }
   @media (max-width: 1080px) {
-    margin-bottom: 100px;
+    margin-bottom: 50px;
     &__cover {
-      margin-top: 100px;
+    display: none;
+    }
+    &__inner-cover {
+      display: block
     }
   }
 }
@@ -736,6 +745,11 @@ footer {
       flex-direction: column;
       align-items: start;
       gap: 40px;
+      &:nth-of-type(3) {
+        a:hover {
+          border-bottom: 2px solid transparent;
+        }
+      }
       header {
         font-weight: 700;
         font-size: 20px;
