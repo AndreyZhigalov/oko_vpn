@@ -19,6 +19,9 @@ $shadow: 0px 12px 30px #0000000f;
 
 @mixin bigButton {
   @include header();
+  display: block;
+  width: max-content;
+  margin: auto;
   font-size: 16px;
   line-height: 20px;
   padding: 16px 34px;
@@ -43,9 +46,12 @@ $shadow: 0px 12px 30px #0000000f;
 @mixin sectionAlign {
   max-width: 1420px;
   margin: 0 auto;
-  padding: 0 30px;
+  padding: 200px 30px;
   @media (max-width: 1080px) {
-    padding: 0 30px;
+    padding: 100px 30px;
+  }
+  @media (max-width: 620px) {
+    padding: 50px 20px;
   }
 }
 
@@ -80,12 +86,12 @@ $shadow: 0px 12px 30px #0000000f;
 @keyframes alienAppears {
   from {
     transform: rotate(-6deg);
-    top: 40%;
+    top: 25%;
     right: 230px;
   }
   to {
     transform: rotate(0deg);
-    top: 35%;
+    top: 20%;
     right: 250px;
   }
 }
@@ -103,7 +109,7 @@ $shadow: 0px 12px 30px #0000000f;
         ОСНОВА СТРАНИЦЫ
 */
 * {
- font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-style: normal;
   box-sizing: border-box;
 }
@@ -263,24 +269,15 @@ header {
 .home {
   position: relative;
   max-width: 1920px;
-  max-height: 900px;
   margin: 0 auto;
-  height: 900px;
+  padding: 200px 0;
+  height: max-content;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   align-items: center;
   justify-items: center;
-  @media (max-width: 1100px) {
-    .home__text {
-      grid-column: 1 /-1;
-      padding: 0 20px;
-      margin: 0;
-    }
-  }
-  @media (max-width: 650px) {
-    height: 600px;
-  }
+
   &__text {
     @include flexBetween();
     @include sideTextBlock();
@@ -289,7 +286,6 @@ header {
     z-index: 2;
     max-width: 516px;
     width: 100%;
-    height: 433px;
     margin-left: 120px;
     p:first-of-type {
       margin-top: 0;
@@ -298,15 +294,17 @@ header {
   &__background {
     position: absolute;
     z-index: 0;
-    height: 900px;
-    top: -120px;
+    top: 0;
     right: 0;
-
+    left: 0;
+    bottom: 0;
+    background: url(../img/earthBackground.svg) top right no-repeat;
+    background-size: contain;
     .alien {
       position: absolute;
       z-index: 1;
       right: 250px;
-      top: 35%;
+      top: 20%;
       height: 540px;
       animation: alienAppears 2s ease-in-out 1;
     }
@@ -316,12 +314,21 @@ header {
       }
     }
     @media (max-width: 420px) {
-      top: unset;
-      bottom: 0;
       transform: rotate(180deg) scaleX(-1);
-      .home__bg-image {
-        height: 50%;
-      }
+    }
+  }
+  @media (max-width: 1100px) {
+    padding: 100px 0;
+    &__text {
+      grid-column: 1 /-1;
+      padding: 0 20px;
+      margin: 0;
+    }
+  }
+  @media (max-width: 650px) {
+    padding: 50px 20px;
+    &__header {
+      font-size: 40px;
     }
   }
 }
@@ -353,9 +360,7 @@ header {
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: max-content 1fr;
-  @media (max-width: 1080px) {
-    margin-top: 100px;
-  }
+  
   header {
     @include sideTextBlock();
     @include flexBetween();
@@ -426,7 +431,6 @@ header {
 .app-screen {
   @include sectionAlign();
   @include flexBetween();
-  min-height: 800px;
   &_image {
     width: 100%;
     max-width: 620px;
@@ -496,7 +500,7 @@ header {
         margin-bottom: 25px;
       }
       ul {
-        list-style: none;        
+        list-style: none;
         .checked {
           &::before {
             content: url('../img/icons/circleAllow.svg');
@@ -504,9 +508,9 @@ header {
         }
         li {
           position: relative;
-          
-             margin: 0 0 27.5px 0;
-          &:last-child { 
+
+          margin: 0 0 27.5px 0;
+          &:last-child {
             margin: 0;
           }
           p {
@@ -523,7 +527,7 @@ header {
     }
   }
   @media (max-width: 1080px) {
-    margin-bottom: 100px;
+
     &__blocks {
       justify-content: flex-start;
       gap: 24px;
@@ -556,14 +560,14 @@ header {
     gap: 28px;
     @media (max-width: 1080px) {
       display: none;
-
     }
     img {
       height: 22px;
       width: max-content;
     }
   }
-  &__cover, &__inner-cover {
+  &__cover,
+  &__inner-cover {
     width: 100%;
     max-width: 622px;
   }
@@ -572,12 +576,12 @@ header {
     margin-bottom: 30px;
   }
   @media (max-width: 1080px) {
-    margin-bottom: 50px;
+
     &__cover {
-    display: none;
+      display: none;
     }
     &__inner-cover {
-      display: block
+      display: block;
     }
   }
 }
@@ -712,8 +716,13 @@ header {
       font-size: 48px;
       margin: 38px 0 62px 0;
     }
-    div {
-      @media (max-width: 640px) {
+  }
+  @media (max-width: 640px) {
+    &__text-block {
+      h3 {
+        font-size: 40px;
+      }
+      div {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
