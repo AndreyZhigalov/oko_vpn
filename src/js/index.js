@@ -3,7 +3,6 @@ function dropdown(event) {
     if(document.body.clientWidth < 640) {
         let block = event.currentTarget.querySelector(".countries__block") 
         let header = event.currentTarget.querySelector("header")
-        console.log(block)
         
         if(block.getAttribute("class").includes("active")) {
             block.classList.remove("active")
