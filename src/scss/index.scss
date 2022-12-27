@@ -1,20 +1,22 @@
-/*
+:root {
+  /*
         ЦВЕТА
 */
-$mainElementColor: #2268ef;
-$error: #f93939;
-$mainBackground: #ffffff;
-$headerText: #353535;
-$commonText: #6b7685;
-$secondElementColor: #9e9e9e;
-$disabled: #ebf2f9;
-$BG-gradient: linear-gradient(132deg, #2268ef 0%, #699cff 100%);
-$shadow: 0px 12px 30px #0000000f;
+  --mainElementColor: #2268ef;
+  --error: #f93939;
+  --mainBackground: #ffffff;
+  --headerText: #353535;
+  --commonText: #6b7685;
+  --secondElementColor: #9e9e9e;
+  --disabled: #ebf2f9;
+  --BG-gradient: linear-gradient(132deg, #2268ef 0%, #699cff 100%);
+  --shadow: 0px 12px 30px #0000000f;
+}
 
 @mixin header {
   font-weight: 700;
   margin: 0%;
-  color: $headerText;
+  color: var(--headerText);
 }
 
 @mixin bigButton {
@@ -26,21 +28,21 @@ $shadow: 0px 12px 30px #0000000f;
   line-height: 20px;
   padding: 16px 34px;
   border-radius: 100px;
-  border: 1px solid $mainElementColor;
+  border: 1px solid var(--mainElementColor);
   text-decoration: none;
   transition: 0.2s;
 }
 
 @mixin blueTextWhiteBG {
-  background-color: $mainBackground;
-  color: $mainElementColor;
-  border: 1px solid $mainElementColor;
+  background-color: var(--mainBackground);
+  color: var(--mainElementColor);
+  border: 1px solid var(--mainElementColor);
 }
 
 @mixin whiteTextBlueBG {
-  background-color: $mainElementColor;
-  color: $mainBackground;
-  border: 1px solid $mainBackground;
+  background-color: var(--mainElementColor);
+  color: var(--mainBackground);
+  border: 1px solid var(--mainBackground);
 }
 
 @mixin sectionAlign {
@@ -66,7 +68,7 @@ $shadow: 0px 12px 30px #0000000f;
     margin: 42px 0;
   }
   span {
-    color: $mainElementColor;
+    color: var(--mainElementColor);
   }
   @media (max-width: 1080px) {
     text-align: center;
@@ -120,11 +122,11 @@ $shadow: 0px 12px 30px #0000000f;
 }
 
 *::-webkit-scrollbar-track {
-  background: $mainBackground; /* color of the tracking area */
+  background: var(--mainBackground); /* color of the tracking area */
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: $mainElementColor; /* color of the scroll thumb */
+  background-color: var(--mainElementColor); /* color of the scroll thumb */
   border-radius: 10px; /* roundness of the scroll thumb */
   border: none; /* creates padding around scroll thumb */
 }
@@ -152,7 +154,7 @@ h1 {
   font-size: 48px;
   line-height: 59px;
   span {
-    color: $mainElementColor;
+    color: var(--mainElementColor);
     @include header();
     font-size: 48px;
     line-height: 59px;
@@ -164,7 +166,7 @@ p {
   font-size: 18px;
   line-height: 22px;
   margin: 0;
-  color: $commonText;
+  color: var(--commonText);
 }
 
 a {
@@ -172,14 +174,14 @@ a {
   font-size: 14px;
   line-height: 20px;
   text-align: right;
-  color: $commonText;
+  color: var(--commonText);
   text-decoration: none;
   border-top: transparent 2px solid;
   border-bottom: transparent 2px solid;
   transition: 0.2s;
   &:hover {
-    color: $mainElementColor;
-    border-bottom: $mainElementColor 2px solid;
+    color: var(--mainElementColor);
+    border-bottom: var(--mainElementColor) 2px solid;
   }
 }
 
@@ -199,7 +201,7 @@ header {
     align-items: center;
     max-width: 1920px;
     height: 100px;
-    background-color: $mainBackground;
+    background-color: var(--mainBackground);
     a {
       text-align: left;
     }
@@ -211,12 +213,12 @@ header {
       transition: 0.5s;
       a {
         &:last-child {
-          color: $mainElementColor;
+          color: var(--mainElementColor);
           border-bottom: transparent 2px solid;
         }
         &:last-child:hover {
-          color: $commonText;
-          border-bottom: $commonText 2px solid;
+          color: var(--commonText);
+          border-bottom: var(--commonText) 2px solid;
         }
       }
     }
@@ -228,7 +230,7 @@ header {
       height: 50px;
       font-size: 24px;
       border-radius: 15px;
-      box-shadow: $shadow;
+      box-shadow: var(--shadow);
       justify-self: end;
       display: none;
       transition: 0.1s;
@@ -246,7 +248,7 @@ header {
         z-index: 9995;
         top: 0;
         left: 100%;
-        background-color: $mainBackground;
+        background-color: var(--mainBackground);
         width: 100%;
         height: 100%;
         grid-template-columns: 1fr;
@@ -266,7 +268,7 @@ header {
   }
 }
 
-.home {
+.hero {
   position: relative;
   max-width: 1920px;
   margin: 0 auto;
@@ -306,7 +308,7 @@ header {
       right: 250px;
       top: 20%;
       height: 540px;
-      animation: alienAppears 2s ease-in-out 1;
+      animation: alienAppears 2s ease-in-out 0s 1;
     }
     @media (max-width: 1100px) {
       .alien {
@@ -348,7 +350,6 @@ header {
     }
   }
 }
-
 /*
 
     МОТИВАЦИОННЫЙ БЛОК
@@ -360,8 +361,8 @@ header {
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: max-content 1fr;
-  
-  header {
+
+   header {
     @include sideTextBlock();
     @include flexBetween();
     max-width: 100%;
@@ -394,7 +395,7 @@ header {
       max-width: 420px;
       min-height: 265px;
       max-height: 336px;
-      box-shadow: $shadow;
+      box-shadow: var(--shadow);
       padding-top: 97px;
       margin: 0;
 
@@ -414,7 +415,7 @@ header {
         text-align: center;
         font-weight: 500;
         font-size: 16px;
-        color: $commonText;
+        color: var(--commonText);
         padding: 0 36px;
         margin: 27px 0 47px 0;
       }
@@ -465,7 +466,7 @@ header {
       font-size: 34px;
       text-align: center;
       span {
-        color: $mainElementColor;
+        color: var(--mainElementColor);
       }
     }
     p {
@@ -482,15 +483,15 @@ header {
       min-width: 250px;
       width: 300px;
       min-height: 375px;
-      box-shadow: $shadow;
-      background-color: $mainBackground;
+      box-shadow: var(--shadow);
+      background-color: var(--mainBackground);
       padding: 35px;
       margin: 0%;
       border-radius: 10px;
       transform: scale(100%);
       transition: transform 0.5s;
       &:first-of-type {
-        border: 2px solid $mainElementColor;
+        border: 2px solid var(--mainElementColor);
       }
       &:hover {
         transform: scale(110%);
@@ -527,7 +528,6 @@ header {
     }
   }
   @media (max-width: 1080px) {
-
     &__blocks {
       justify-content: flex-start;
       gap: 24px;
@@ -553,6 +553,7 @@ header {
   &__text-block {
     @include sideTextBlock();
   }
+
   &__text-logos {
     margin-top: 45px;
     display: flex;
@@ -575,13 +576,18 @@ header {
     display: none;
     margin-bottom: 30px;
   }
+  .main-button {
+    margin: 0;
+  }
   @media (max-width: 1080px) {
-
     &__cover {
       display: none;
     }
     &__inner-cover {
       display: block;
+    }
+    .main-button {
+      margin: auto;
     }
   }
 }
@@ -606,7 +612,9 @@ header {
       max-width: 480px;
     }
   }
-
+  .main-button {
+    margin: 0;
+  }
   &__wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -675,6 +683,9 @@ header {
         max-width: 100%;
       }
     }
+    .main-button {
+      margin: auto;
+    }
     .countries__wrapper {
       justify-content: center;
       .countries__container {
@@ -716,6 +727,11 @@ header {
       font-size: 48px;
       margin: 38px 0 62px 0;
     }
+  }
+  &__buttons-container {
+    @include flexBetween();
+    flex-direction: column;
+    gap: 10px;
   }
   @media (max-width: 640px) {
     &__text-block {
@@ -779,7 +795,7 @@ footer {
   }
   hr {
     max-width: 1280px;
-    color: $secondElementColor;
+    color: var(--secondElementColor);
     margin: 70px auto;
   }
   .copyright {
@@ -789,4 +805,8 @@ footer {
       padding: 0 30px;
     }
   }
+}
+
+.hidden {
+  display: none !important;
 }

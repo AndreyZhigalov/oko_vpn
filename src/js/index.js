@@ -1,4 +1,27 @@
 "use strict"
+
+window.onload = () => {
+    const options = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.2,
+    }
+    const callback = (entries, observer) => {
+        if (!entries.some(elem => elem.isIntersecting)) return
+
+        entries.forEach(elem => {
+            if (!elem.isIntersecting) return
+            Array().forEach.call(elem.target.children, (child) => { child.classList.remove("hidden") })
+            observer.unobserve(elem.target)
+        })
+    }
+
+    const observer = new IntersectionObserver(callback, options)
+
+    let sections = Array.from(document.querySelectorAll("section"))
+    sections.forEach(section => observer.observe(section))
+}
+
 function dropdown(event) {
     if (document.body.clientWidth < 640) {
         event.currentTarget.querySelector(".countries__block").classList.toggle("active")
