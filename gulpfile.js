@@ -30,7 +30,7 @@ function scss() {
 
 function js() {
     return src("src/js/**.js")
-        .pipe(include({ prefix: "@@" }))        
+        .pipe(include({ prefix: "@@" }))
         .pipe(dest("dist/js"))
 }
 

@@ -115,6 +115,11 @@
   animation-delay: var(--delay-6);
 }
 
+.hidden {
+  opacity: 0;
+  animation-name: unset;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0%;
