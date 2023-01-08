@@ -11,7 +11,7 @@ window.onload = () => {
 
         entries.forEach(elem => {
             if (!elem.isIntersecting) return
-            Array().forEach.call(elem.target.children, (child) => { child.classList.remove("hidden") })
+            Array.from(elem.target.querySelectorAll("[class~='hidden']")).forEach((child) => { child.classList.remove("hidden") })
             observer.unobserve(elem.target)
         })
     }
