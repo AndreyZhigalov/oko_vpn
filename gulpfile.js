@@ -5,7 +5,7 @@ const include = require("gulp-file-include")
 const csso = require("gulp-csso")
 const del = require("del")
 const concat = require("gulp-concat")
-const jsmin = require("gulp-minify")
+const minify = require("gulp-minify")
 const autoprefixer = require("gulp-autoprefixer")
 const sync = require("browser-sync").create()
 const ghPages = require("gulp-gh-pages")
@@ -31,6 +31,7 @@ function scss() {
 function js() {
     return src("src/js/**.js")
         .pipe(include({ prefix: "@@" }))
+        .pipe(minify())
         .pipe(dest("dist/js"))
 }
 

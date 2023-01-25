@@ -18,7 +18,7 @@ window.onload = () => {
 
     const observer = new IntersectionObserver(callback, options)
 
-    let sections = Array.from(document.querySelectorAll("section"))
+    let sections = Array.from(document.querySelectorAll(".animate"))
     sections.forEach(section => observer.observe(section))
 }
 
